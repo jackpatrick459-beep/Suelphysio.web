@@ -13,20 +13,37 @@
   var navLinks = document.getElementById('navLinks');
 
   if (navToggle && navLinks) {
-    navToggle.addEventListener('click', function () {
-      var isOpen = navLinks.classList.toggle('is-open');
-      navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-      document.body.style.overflow = isOpen ? 'hidden' : '';
-    });
+   var navToggle = document.getElementById('navToggle');
+    var navLinks = document.getElementById('navLinks');
+    var navClose = document.getElementById('navClose');
+    var navBackdrop = document.getElementById('navBackdrop');
 
-    // Close menu when a link is clicked (mobile)
-    navLinks.querySelectorAll('a').forEach(function (link) {
-      link.addEventListener('click', function () {
-        navLinks.classList.remove('is-open');
-        navToggle.setAttribute('aria-expanded', 'false');
-        document.body.style.overflow = '';
+    function openNav() {
+      navLinks.classList.add('is-open');
+      navToggle.setAttribute('aria-expanded', 'true');
+      if (navBackdrop) navBackdrop.classList.add('is-visible');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeNav() {
+      navLinks.classList.remove('is-open');
+      navToggle.setAttribute('aria-expanded', 'false');
+      if (navBackdrop) navBackdrop.classList.remove('is-visible');
+      document.body.style.overflow = '';
+    }
+
+    if (navToggle && navLinks) {
+      navToggle.addEventListener('click', function () {
+        navLinks.classList.contains('is-open') ? closeNav() : openNav();
       });
-    });
+      navLinks.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', closeNav);
+      });
+      if (navClose) navClose.addEventListener('click', closeNav);
+      if (navBackdrop) navBackdrop.addEventListener('click', closeNav);
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') closeNav();
+      });
+    }
   }
 
   /* ---------- Scroll reveal ---------- */
