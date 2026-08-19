@@ -139,8 +139,8 @@
       var phoneInput = document.getElementById('phone');
       var serviceInput = document.getElementById('service');
       var dateInput = document.getElementById('preferredDate');
+      var timeInput = document.getElementById('preferredTime');
       var messageInput = document.getElementById('message');
-
       var isValid = true;
 
       if (!nameInput.value.trim()) {
@@ -172,6 +172,7 @@
         'Phone: ' + phoneInput.value.trim(),
         'Service: ' + (serviceInput ? serviceInput.value : 'Not specified'),
         'Preferred date: ' + (dateInput && dateInput.value ? dateInput.value : 'Not specified'),
+        'Preferred time: ' + (timeInput && timeInput.value ? timeInput.value : 'Not specified'),
         'Details: ' + (messageInput && messageInput.value.trim() ? messageInput.value.trim() : 'None provided')
       ];
 
